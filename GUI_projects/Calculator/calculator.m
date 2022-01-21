@@ -241,14 +241,12 @@ b = get(handles.num2,'string')
 a = str2double(a)
 b = str2double(b)
 if isnan(a)
-    set(handles.error,'string','please enter numbers only')
+   set(handles.error, 'string', 'Undefined Variable')
 end
 if isnan(b)
-    set(handles.error,'string','please enter numbers only')
+   set(handles.error, 'string', 'Undefined Variable')
 end
-if (~(isnan(a)&&isnan(b)))
-    
-    switch (val_1)
+   switch (val_1)
         case 1
           result = a+b
         case 2
@@ -258,8 +256,14 @@ if (~(isnan(a)&&isnan(b)))
         case 4
           result = a*b
     end
-end
- set(handles.result_1,'string',result)       
+    if isnan(result)
+        set(handles.error, 'string', 'Undefined Variable')
+    elseif result == inf
+        set(handles.error, 'string', 'Cannot devide by 0')
+    else
+        set(handles.result_1, 'string', result)
+    end
+     
 
 % hObject    handle to equal (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
